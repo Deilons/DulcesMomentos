@@ -14,6 +14,15 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/pedidos', function () {
+    return Inertia::render('Pedidos');
+})->middleware(['auth', 'verified', 'role:admin'])->name('pedidos');
+
+// Rutas para la vista de clientes
+Route::get('/clientes', function () {
+    return Inertia::render('Clientes');
+})->middleware(['auth', 'verified', 'role:admin|user'])->name('clientes');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
