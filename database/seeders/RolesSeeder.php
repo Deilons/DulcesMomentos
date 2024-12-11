@@ -10,13 +10,8 @@ class RolesSeeder extends Seeder
 {
     public function run()
     {
-        $adminRole = Role::create(['name' => 'admin']);
-        $userRole = Role::create(['name' => 'user']);
-
-        $manageClients = Permission::create(['name' => 'manage clients']);
-        $manageOrders = Permission::create(['name' => 'manage orders']);
-
-        $adminRole->givePermissionTo([$manageClients, $manageOrders]);
-        $userRole->givePermissionTo([$manageOrders]);
+        Role::firstOrCreate(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'operario']);
+        Role::firstOrCreate(['name' => 'cliente']);
     }
 }
