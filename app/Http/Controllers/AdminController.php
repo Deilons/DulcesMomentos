@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -91,7 +92,7 @@ class AdminController extends Controller
     // Clientes
     public function indexClientes()
     {
-        $clientes = User::role('cliente')->get();
+        $clientes = Cliente::role('cliente')->get();
         return Inertia::render('Admin/Clientes/Index', [
             'clientes' => $clientes,
         ]);
@@ -143,5 +144,21 @@ class AdminController extends Controller
         ]);
 
         return redirect()->route('admin.clientes.index')->with('success', 'Cliente actualizado con éxito.');
+    }
+
+    public function destroyCliente($id)
+    {
+        $cliente = User::findOrFail($id);
+        $cliente->delete();
+
+        return redirect()->route('admin.clientes.index')->with('success', 'Cliente eliminado con éxito.');
+    }
+
+    public function showCliente($id)
+    {
+        $cliente = User::findOrFail($id);
+        return Inertia::render('Admin/Clientes/Show', [
+            'cliente' => $cliente,
+        ]);
     }
 }

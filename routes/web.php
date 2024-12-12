@@ -26,6 +26,8 @@ Route::middleware(['role:admin'])->group(function () {
     Route::get('/admin/clientes/{id}/edit', [AdminController::class, 'editCliente'])->name('admin.clientes.edit');
     Route::post('/admin/clientes', [AdminController::class, 'storeCliente'])->name('admin.clientes.store');
     Route::put('/admin/clientes/{id}', [AdminController::class, 'updateCliente'])->name('admin.clientes.update');
+    Route::delete('/admin/clientes/{id}', [AdminController::class, 'destroyCliente'])->name('admin.clientes.destroy');
+    Route::get('/admin/clientes/{id}', [AdminController::class, 'showCliente'])->name('admin.clientes.show');
 });
 
 Route::get('/', function () {

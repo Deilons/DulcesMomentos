@@ -1,6 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 
 export default function Clientes({ clientes }) {
+    console.log(clientes);
     return (
         <div className="p-6 bg-white shadow-md rounded">
             <h2 className="text-xl font-bold mb-4">Gestión de Clientes</h2>
@@ -17,7 +18,7 @@ export default function Clientes({ clientes }) {
                     {clientes.map((cliente) => (
                         <tr key={cliente.id}>
                             <td className="border px-4 py-2">{cliente.id}</td>
-                            <td className="border px-4 py-2">{cliente.name}</td>
+                            <td className="border px-4 py-2">{cliente.nombre}</td>
                             <td className="border px-4 py-2">{cliente.email}</td>
                             <td className="border px-4 py-2">
                                 <Link href={`/admin/clientes/${cliente.id}/edit`} className="text-blue-600">
