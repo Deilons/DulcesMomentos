@@ -20,6 +20,8 @@ class AdminController extends Controller
     public function indexOperarios()
     {
         $operarios = User::role('operario')->get();
+
+
         return Inertia::render('Admin/Operarios/Index', [
             'operarios' => $operarios,
         ]);

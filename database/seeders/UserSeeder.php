@@ -10,19 +10,27 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        $admin = User::factory()->create([
-            'email' => 'admin@dulcesmomentos.com',
-        ]);
-        $admin->assignRole('admin');
+        // $admin = User::factory()->create([
+        //     'email' => 'admin@dulcesmomentos.com',
+        // ]);
+        // $admin->assignRole('admin');
 
         $operario = User::factory()->create([
             'email' => 'operario@dulcesmomentos.com',
         ]);
         $operario->assignRole('operario');
 
-        $cliente = User::factory()->create([
-            'email' => 'cliente@dulcesmomentos.com',
-        ]);
-        $cliente->assignRole('cliente');
+        User::factory(10)->create()->each(function ($user)  {
+
+            $user->assignRole('operario');
+
+        });
+
+
+
+        // $cliente = User::factory()->create([
+        //     'email' => 'cliente@dulcesmomentos.com',
+        // ]);
+        // $cliente->assignRole('cliente');
     }
 }
