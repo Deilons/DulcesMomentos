@@ -6,9 +6,26 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AdminController;
 
+// rutas para el admin
 Route::middleware(['role:admin'])->group(function () {
-    Route::get('/admin/operarios', [AdminController::class, 'index'])->name('admin.operarios.index');
-    Route::post('/admin/operarios', [AdminController::class, 'store'])->name('admin.operarios.store');
+    // admin panel
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+    // Operarios
+    Route::get('/admin/operarios', [AdminController::class, 'indexOperarios'])->name('admin.operarios.index');
+    Route::get('/admin/operarios/create', [AdminController::class, 'createOperario'])->name('admin.operarios.create');
+    Route::get('/admin/operarios/{id}/edit', [AdminController::class, 'editOperario'])->name('admin.operarios.edit');
+    Route::post('/admin/operarios', [AdminController::class, 'storeOperario'])->name('admin.operarios.store');
+    Route::put('/admin/operarios/{id}', [AdminController::class, 'updateOperario'])->name('admin.operarios.update');
+    Route::delete('/admin/operarios/{id}', [AdminController::class, 'destroyOperario'])->name('admin.operarios.destroy');
+    Route::get('/admin/operarios/{id}', [AdminController::class, 'showOperario'])->name('admin.operarios.show');
+
+    // Clientes
+    Route::get('/admin/clientes', [AdminController::class, 'indexClientes'])->name('admin.clientes.index');
+    Route::get('/admin/clientes/create', [AdminController::class, 'createCliente'])->name('admin.clientes.create');
+    Route::get('/admin/clientes/{id}/edit', [AdminController::class, 'editCliente'])->name('admin.clientes.edit');
+    Route::post('/admin/clientes', [AdminController::class, 'storeCliente'])->name('admin.clientes.store');
+    Route::put('/admin/clientes/{id}', [AdminController::class, 'updateCliente'])->name('admin.clientes.update');
 });
 
 Route::get('/', function () {
