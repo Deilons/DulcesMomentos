@@ -4,6 +4,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AdminController;
+
+Route::middleware(['role:admin'])->group(function () {
+    Route::get('/admin/operarios', [AdminController::class, 'index'])->name('admin.operarios.index');
+    Route::post('/admin/operarios', [AdminController::class, 'store'])->name('admin.operarios.store');
+});
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -16,9 +22,8 @@ Route::get('/', function () {
 
 Route::get('/pedidos', function () {
     return Inertia::render('Pedidos');
-})->middleware(['auth', 'verified', 'role:admin'])->name('pedidos');
+})->middleware(['auth', 'verified', 'role:admin|user'])->name('pedidos');
 
-// Rutas para la vista de clientes
 Route::get('/clientes', function () {
     return Inertia::render('Clientes');
 })->middleware(['auth', 'verified', 'role:admin|user'])->name('clientes');
